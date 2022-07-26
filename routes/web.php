@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'Latest Listings',
-        'listings' => 
-        [
-            'id' => 1,
-            'title' => 'Listing One',
-            'Description' => 'This is the description for the first listing'
-        ]
-    ]);
+    $listings = Listing::all();
+    return view('listings', compact('listings'));
 });
 
 Route::get('hello/{id}', fn($id) => 
     'Hello Fiyin, Your number is '. $id)
     ->where('id', '[0-9]+');
+
+Route::get('/listing/{id}', function($id) {
+    $listing = Listing::where('id',$id)->get();
+    return view('listing',compact('listing'));
+});
