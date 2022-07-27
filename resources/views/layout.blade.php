@@ -4,11 +4,13 @@
         <meta name="viewport" content="width=device-width,
         initial-scale=1.0">
         <meta http-equiv="X-UA-Compartible" content="ie=edge">
+        <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+        <script src="//unpkg.com/alpinejs" defer></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <title>Laracareer</title>
     </head>
 
-    <body>
+    <body style="font-family:'Mulish';">
        <main class="mb-24">
         {{-- VIEW OUTPUT --}}
         @yield('content')

@@ -27,7 +27,7 @@
         <div class="relative bg-rose-200 py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
             <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl  left-4 -top-6">
                 <!-- svg  -->
-                <img src="{{asset('images/ABEG.png')}}" alt="company_image" width="40px" height="40px" class="rounded-full">
+                <img src="{{$listing->logo ? asset('storage/' .$listing->logo) : asset("/images/no image.png")}}" alt="company_image" width="40px" height="40px" class="rounded-full">
             </div>
             <div class="mt-8">
                 <p class="text-xl font-semibold my-2">{{$listing->title}}</p>
@@ -72,5 +72,8 @@
         </div>
         @endforeach
     </div>
+</div>
+<div class="mt-6 p-4">
+    {{$listings->links()}}
 </div>
 @endsection

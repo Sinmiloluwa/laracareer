@@ -22,7 +22,7 @@
 </form>
 <div class="flex flex-col items-center justify-center text-center py-6">
     <h1 class="py-3 font-bold">Job Detail</h1>
-    <img src="{{asset('images/ABEG.png')}}" alt="company_logo" width="100px" height="100px">
+    <img src="{{$listing->logo ? asset('storage/' .$listing->logo) : asset("/images/no image.png")}}" alt="company_logo" width="100px" height="100px">
     <h2 class="text-xl font-bold mb-2 py-6">{{$listing->company}}</h2>
     <h3 class="text-2xl">{{$listing->title}}</h3>
     <ul class="flex py-6">
