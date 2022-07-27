@@ -4,9 +4,11 @@
 @include('partials._nav')
 @include('partials._hero')
 
+<form action="/">
+    @csrf
 <div class="flex items-center justify-end mx-12 my-6">
     <div class="flex border-2 rounded">
-        <input type="text" class="px-3 py-2 w-80" placeholder="Search...">
+        <input type="text" class="px-3 py-2 w-80" placeholder="Search..." name="search">
         <button class="flex items-center justify-center px-4 border-l">
             <svg class="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24">
@@ -16,6 +18,7 @@
         </button>
     </div>
 </div>
+</form>
 
 <div class="flex items-center justify-center py-12">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
