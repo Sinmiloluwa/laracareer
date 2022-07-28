@@ -11,7 +11,7 @@
                 </div>
                 <!-- Primary Navbar items -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="" class="py-4 px-2 text-indigo-500 border-b-4 border-indigo-500 font-semibold ">Home</a>
+                    <a href="/" class="py-4 px-2 text-indigo-500 border-b-4 border-indigo-500 font-semibold ">Home</a>
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300">Services</a>
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300">About</a>
                     <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300">Contact Us</a>
@@ -19,8 +19,21 @@
             </div>
             <!-- Secondary Navbar items -->
             <div class="hidden md:flex items-center space-x-3 ">
-                <a href="" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-indigo-500 hover:text-white transition duration-300">Log In</a>
-                <a href="" class="py-2 px-2 font-medium text-white bg-indigo-500 rounded hover:bg-indigo-400 transition duration-300">Create Account</a>
+                @guest
+                <a href="/login" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-indigo-500 hover:text-white transition duration-300">Log In</a>
+                <a href="register" class="py-2 px-2 font-medium text-white bg-indigo-500 rounded hover:bg-indigo-400 transition duration-300">Create Account</a>
+                @endguest
+                @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-dropdown-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-dropdown-link>
+                </form>
+                @endauth
             </div>
             <!-- Mobile menu button -->
             <div class="md:hidden flex items-center">

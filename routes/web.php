@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Listing;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListingController;
 
@@ -19,6 +19,18 @@ Route::get('/', [ListingController::class, 'index']);
 
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
 
-Route::get('/listings/create', [ListingController::class, 'create']);
+Route::middleware('verified')->group( function () {
+    Route::get('/listings/create', [ListingController::class, 'create']);
 
-Route::post('/listings', [ListingController::class, 'store']);
+    Route::post('/listing', [ListingController::class, 'store']);
+});
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+
