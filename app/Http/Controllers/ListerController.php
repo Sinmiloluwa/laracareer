@@ -39,5 +39,7 @@ class ListerController extends Controller
         dd('yeah');
     }
 
-    
+    public function applications() {
+        dd('yeah');
+    }
 }

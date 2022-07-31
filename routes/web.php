@@ -33,7 +33,7 @@ Route::middleware(['verified','auth'])->prefix('lister/user')->group(function ()
     Route::get('/edit', [ListerController::class, 'edit'])->name('edit');
     Route::post('/delete', [ListerController::class, 'delete'])->name('destroy');
     Route::post('/edite', [ListerController::class, 'store'])->name('storeNew');
-    // Route::get('/applications', [ListerController::class, 'applications'])->name('applications');
+    Route::get('/applications', [ListerController::class, 'applications'])->name('applications');
 });
 
 
