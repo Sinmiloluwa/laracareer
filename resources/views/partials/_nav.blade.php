@@ -24,6 +24,7 @@
                 <a href="register" class="py-2 px-2 font-medium text-white bg-indigo-500 rounded hover:bg-indigo-400 transition duration-300">Create Account</a>
                 @endguest
                 @auth
+                <a href="{{route('dashboard')}}" class="py-2 px-2 font-medium border-rose-600 bg-none rounded hover:border-rose-600 transition duration-300 mb-2">Dashboard</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
@@ -33,6 +34,7 @@
                         {{ __('Log Out') }}
                     </x-dropdown-link>
                 </form>
+                
                 @endauth
             </div>
             <!-- Mobile menu button -->

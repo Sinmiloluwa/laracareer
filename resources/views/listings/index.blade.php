@@ -5,7 +5,6 @@
 @include('partials._hero')
 
 <form action="/">
-    @csrf
 <div class="flex items-center justify-end mx-12 my-6">
     <div class="flex border-2 rounded">
         <input type="text" class="px-3 py-2 w-80" placeholder="Search..." name="search">
@@ -22,12 +21,13 @@
 
 <div class="flex items-center justify-center py-12">
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+        @unless(count($listings) == 0)
         @foreach($listings as $listing)
         <!-- 1 card -->
         <div class="relative bg-rose-200 py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
-            <div class=" text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl  left-4 -top-6">
+            <div class=" text-white flex items-center absolute rounded-full py-3 px-3 shadow-xl  left-4 -top-6">
                 <!-- svg  -->
-                <img src="{{$listing->logo ? asset('storage/' .$listing->logo) : asset("/images/no image.png")}}" alt="company_image" width="40px" height="40px" class="rounded-full">
+                <img src="{{$listing->logo}}" alt="company_image" width="70px" height="70px" class="rounded-full">
             </div>
             <div class="mt-8">
                 <p class="text-xl font-semibold my-2">{{$listing->title}}</p>
@@ -57,6 +57,8 @@
                     @foreach($tags as $tag)
                     <a href="/?tag={{$tag}}" class="bg-rose-600 text-white rounded-xl py-1 px-3 mr-2 text-xs">{{$tag}}</a> 
                     @endforeach
+
+                    
                 </div>
                 <div class="border-t-2"></div>
 
@@ -71,9 +73,18 @@
             </div>
         </div>
         @endforeach
+
+        @else
+            <h3 class="flex items-center justify-end font-bold text-2xl">No listings found</h3>
+        @endunless
+       
     </div>
+   
 </div>
+
 <div class="mt-6 p-4">
     {{$listings->links()}}
 </div>
+
+
 @endsection

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListerController;
 use App\Http\Controllers\ListingController;
 
 /*
@@ -22,14 +23,24 @@ Route::get('/listing/{listing}', [ListingController::class, 'show']);
 Route::middleware('verified')->group( function () {
     Route::get('/listings/create', [ListingController::class, 'create']);
 
-    Route::post('/listing', [ListingController::class, 'store']);
+    Route::post('/listings', [ListingController::class, 'store']);
+});
+
+Route::middleware(['verified','auth'])->prefix('lister/user')->group(function () {
+    Route::get('/dashboard', [ListerController::class, 'index'])->name('dashboard');
+    Route::get('/search', [ListerController::class, 'search'])->name('search');
+    Route::get('/listings', [ListerController::class, 'listings'])->name('listings');
+    Route::get('/edit', [ListerController::class, 'edit'])->name('edit');
+    Route::post('/delete', [ListerController::class, 'delete'])->name('destroy');
+    Route::post('/edite', [ListerController::class, 'store'])->name('storeNew');
+    // Route::get('/applications', [ListerController::class, 'applications'])->name('applications');
 });
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/lister/user', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 

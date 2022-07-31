@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Cookie;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ListingController extends Controller
 {
@@ -14,6 +16,11 @@ class ListingController extends Controller
     }
 
     public function show(Listing $listing) {
+        if(Cookie::get($listing->id) == ''){
+            $cookie = Cookie::make($listing->id,'1',60);
+            $listing->incrementReadCount();
+            return response()->view('listings.show',compact('listing'))->withCookie($cookie);
+        }
         return view('listings.show',compact('listing'));
     }
 
@@ -33,8 +40,11 @@ class ListingController extends Controller
         ]);
 
         if($request->hasFile('logo')) {
-            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+            $uploadedFileUrl = Cloudinary::upload($request->file('logo')->getRealPath())->getSecurePath();
         }
+
+        $formFields['logo'] = $uploadedFileUrl;
+        $formFields['user_id'] = auth()->user()->id;
         
         Listing::create($formFields);
 
